@@ -16,8 +16,14 @@ jobs:
         with:
           BUILD_SCRIPT: extra-x86_64-build
           PKGBUILD: $GITHUB_WORKSPACE/PKGtest
+          OUTDIR: $HOME/arch-packages
+      - name: move file
+        run: |
+          mkdir -p ./artifact/
+          find $HOME/arch-packages -type f -name "*.zst*"
+          cp -rf $(find $HOME/arch-packages -type f -name "*.zst*") ./artifact/
       - name: Upload package as artifact
         uses: actions/upload-artifact@v2
         with:
           name: test
-          path: $HOME/arch-packages
+          path: ./artifact/
