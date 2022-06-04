@@ -20,8 +20,10 @@ jobs:
       - name: move file
         run: |
           mkdir -p ./artifact/
-          find $HOME/arch-packages -type f -name "*.zst*"
-          cp -rf $(find $HOME/arch-packages -type f -name "*.zst*") ./artifact/
+          find $HOME/arch-packages -type f -name "*.zst"
+          echo "current path"
+          pwd
+          cp -rf $(find $HOME/arch-packages -type f -name "*.zst") ./artifact/
       - name: Upload package as artifact
         uses: actions/upload-artifact@v2
         with:
