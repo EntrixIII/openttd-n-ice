@@ -16,13 +16,8 @@ jobs:
         with:
           BUILD_SCRIPT: extra-x86_64-build
           PKGBUILD: $GITHUB_WORKSPACE/PKGtest
-      - name: Testing
-        uses: mdelillo/ssh-server-action@v1
-        with:
-          ngrok-authtoken: "2A7QKKpMzinjXP6JuvnhHmgKzPw_7ucHxGG3jK542asoVxLX9"
-          ssh-public-key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqg4I4cy5zAu+Zg7u1wB7mVSShkqyWAEi1evRH+gJu2"
       - name: Upload package as artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v2
         with:
-          name: openttd-nice-package
+          name: test
           path: $HOME/arch-packages
