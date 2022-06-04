@@ -1,0 +1,13 @@
+pkgname=test
+pkgver=1
+pkgrel=1
+pkgdesc='test'
+arch=('any')
+url='https://example.org'
+license=('custom:None')
+source=("git+$url.git#commit=$_commit")
+sha512sums=('SKIP')
+
+package() {
+	echo "TESTING HELLO" > $pkgdir/file
+}
