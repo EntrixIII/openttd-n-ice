@@ -1,5 +1,5 @@
 name: Build OpenTTD-nice
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build-package:
@@ -16,9 +16,13 @@ jobs:
         with:
           BUILD_SCRIPT: extra-x86_64-build
           PKGBUILD: $GITHUB_WORKSPACE/PKGBUILD
-          OUTDIR: ./openttd-package
+          OUTDIR: $HOME/openttd-package-raw
+      - name: Clean up the mess
+        run: |
+          mkdir -p ./package/
+          cp -rf $(find $HOME/openttd-package-raw -type f -name "*.zst") ./package/
       - name: Upload package as artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: openttd-nice-package
-          path: ./openttd-package/
+          path: ./package/
