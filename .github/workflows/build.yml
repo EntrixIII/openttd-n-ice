@@ -16,9 +16,9 @@ jobs:
         with:
           BUILD_SCRIPT: extra-x86_64-build
           PKGBUILD: $GITHUB_WORKSPACE/PKGBUILD
-          OUTDIR: $HOME/openttd-package
+          OUTDIR: ./openttd-package
       - name: Upload package as artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: openttd-nice-package
-          path: $HOME/openttd-package/
+          path: ./openttd-package/
