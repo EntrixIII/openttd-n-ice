@@ -1,0 +1,24 @@
+name: Build OpenTTD-nice
+on: [push, pull_request]
+
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux
+      options: --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Arch Linux package
+        uses: ./
+        with:
+          BUILD_SCRIPT: extra-x86_64-build
+          PKGBUILD: $GITHUB_WORKSPACE/PKGBUILD
+          OUTDIR: $HOME/openttd-package
+      - name: Upload package as artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: openttd-nice-package
+          path: $HOME/openttd-package/
